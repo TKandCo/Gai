@@ -21,6 +21,10 @@ export default function CoachSelfTestPage() {
 
   useEffect(() => {
     run();
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "1") {
+      setAiEnabled(false);
+      return;
+    }
     fetch("/api/coach")
       .then((r) => (r.ok ? r.json() : { enabled: false }))
       .then((j: { enabled: boolean }) => setAiEnabled(j.enabled))

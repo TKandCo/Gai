@@ -5,7 +5,7 @@ import { writeFileSync } from "node:fs";
 const r = spawnSync("npx", ["next", "build"], {
   stdio: "inherit",
   shell: true,
-  env: { ...process.env, STATIC_EXPORT: "1" },
+  env: { ...process.env, STATIC_EXPORT: "1", NEXT_PUBLIC_STATIC_EXPORT: "1" },
 });
 if (r.status !== 0) process.exit(r.status ?? 1);
 

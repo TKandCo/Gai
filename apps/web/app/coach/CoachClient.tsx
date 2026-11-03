@@ -39,6 +39,8 @@ export function CoachClient() {
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Bản tĩnh (GitHub Pages) không có máy chủ: khỏi hỏi, dùng chế độ cơ bản
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "1") return;
     fetch("/api/coach")
       .then((r) => (r.ok ? r.json() : { enabled: false }))
       .then((j: { enabled: boolean }) => {
