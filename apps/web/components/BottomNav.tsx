@@ -7,6 +7,7 @@ const ITEMS = [
   { href: "/", label: "Trang chủ", icon: HomeIcon },
   { href: "/learn", label: "Học", icon: BookIcon },
   { href: "/lab", label: "Phòng lab", icon: GridIcon },
+  { href: "/analyze", label: "Phân tích", icon: SearchIcon },
   { href: "/journal", label: "Nhật ký", icon: NoteIcon },
 ];
 
@@ -14,7 +15,7 @@ export function BottomNav() {
   const path = usePathname();
   return (
     <nav className="pb-safe fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 backdrop-blur">
-      <ul className="mx-auto grid max-w-md grid-cols-4">
+      <ul className="mx-auto grid max-w-md grid-cols-5">
         {ITEMS.map(({ href, label, icon: Icon }) => {
           const active = href === "/" ? path === "/" : path.startsWith(href);
           return (
@@ -69,6 +70,14 @@ function GridIcon() {
       <rect x="13" y="3" width="8" height="8" rx="1.5" />
       <rect x="3" y="13" width="8" height="8" rx="1.5" />
       <rect x="13" y="13" width="8" height="8" rx="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+function SearchIcon() {
+  return (
+    <svg {...svgProps}>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m20 20-4.2-4.2M8.5 11h5M11 8.5v5" />
     </svg>
   );
 }

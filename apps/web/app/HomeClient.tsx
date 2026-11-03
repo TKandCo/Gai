@@ -12,6 +12,7 @@ import { Badges } from "@/components/Badges";
 const HELP = [
   { icon: "📚", text: "Bấm \"Học\" ở dưới cùng để học từng bài ngắn. Làm đúng câu đố sẽ mở bài mới." },
   { icon: "🧪", text: "\"Phòng lab\" là nơi tự tạo trò chơi: chạm vào ô để đổi số và xem điều gì xảy ra." },
+  { icon: "🔍", text: "\"Phân tích\" giúp bạn phân tích một chuyện thật (tin tức, chuyện ở lớp) theo từng bước." },
   { icon: "🔮", text: "\"Nhật ký\" để ghi dự đoán về tương lai, rồi xem mình đoán chuẩn đến đâu." },
   { icon: "👨‍👩‍👧", text: "Bấm vào hình đại diện ở góc trên để đổi người học hoặc thêm người trong nhà." },
 ];
@@ -89,6 +90,7 @@ export function HomeClient() {
         <Tile href="/learn/practice" icon="🔁" title="Luyện tập" body="Ôn lại câu cũ, nhất là câu từng sai" />
         <Tile href="/lab" icon="🧪" title="Phòng lab" body="Tự tạo trò chơi và xem kết quả" />
         <Tile href="/journal" icon="🔮" title="Nhật ký" body="Đoán trước, đối chiếu sau" />
+        <Tile href="/analyze" icon="🔍" title="Phân tích" body="Phân tích một chuyện thật, từng bước" />
         <Tile href="/learn" icon="🗺️" title="Lộ trình" body="Xem tất cả các bài học" />
       </div>
 
