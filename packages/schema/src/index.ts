@@ -49,11 +49,11 @@ export const NormalFormGame = z
   .superRefine((g, ctx) => {
     const [rows, cols] = g.actions;
     if (g.payoffs.length !== rows.length) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Số hàng payoff không khớp số hành động của bên hàng" });
+      ctx.addIssue({ code: "custom", message: "Số hàng payoff không khớp số hành động của bên hàng" });
     }
     g.payoffs.forEach((row, i) => {
       if (row.length !== cols.length) {
-        ctx.addIssue({ code: z.ZodIssueCode.custom, message: `Hàng ${i + 1} không khớp số hành động của bên cột` });
+        ctx.addIssue({ code: "custom", message: `Hàng ${i + 1} không khớp số hành động của bên cột` });
       }
     });
   });
