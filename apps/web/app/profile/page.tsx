@@ -6,6 +6,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { ProfileForm } from "@/components/ProfileForm";
 import { AccountChip } from "@/components/AccountChip";
 import { Badges } from "@/components/Badges";
+import { downloadBackup, restoreBackup } from "@/lib/backup";
+import Link from "next/link";
 
 export default function ProfilePage() {
   const { profiles, active, switchProfile, addProfile, removeProfile, updateProfile, theme, setTheme } = useProfiles();
@@ -130,9 +132,47 @@ export default function ProfilePage() {
       </section>
 
       <section className="mb-6 rounded-2xl border border-line bg-surface p-4 text-sm">
-        <h2 className="mb-2 font-bold">Đồng bộ nhiều thiết bị</h2>
-        <p className="mb-3 text-muted">Hiện tiến độ lưu trên máy này. Đồng bộ qua tài khoản sẽ có ở bản sau.</p>
-        <AccountChip />
+        <h2 className="mb-2 font-bold">💾 Sao lưu dữ liệu</h2>
+        <p className="mb-3 text-muted">
+          Dữ liệu của cả nhà (hồ sơ, tiến độ học, nhật ký, phân tích) lưu ngay trên máy này. Tải file sao lưu để cất giữ, hoặc chuyển sang
+          điện thoại khác.
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <button onClick={downloadBackup} className="h-11 rounded-xl bg-accent font-semibold text-accent-ink">
+            ⬇️ Tải về
+          </button>
+          <label className="flex h-11 cursor-pointer items-center justify-center rounded-xl border-2 border-line font-semibold">
+            ⬆️ Khôi phục
+            <input
+              type="file"
+              accept="application/json,.json"
+              className="sr-only"
+              onChange={async (e) => {
+                const f = e.target.files?.[0];
+                e.target.value = "";
+                if (!f) return;
+                if (!confirm("Khôi phục sẽ ghi đè dữ liệu hiện tại trên máy này. Tiếp tục?")) return;
+                try {
+                  const n = restoreBackup(await f.text());
+                  alert(`Đã khôi phục ${n} mục. App sẽ tải lại.`);
+                  location.reload();
+                } catch (err) {
+                  alert(`Không khôi phục được: ${(err as Error).message}`);
+                }
+              }}
+            />
+          </label>
+        </div>
+        <div className="mt-3">
+          <AccountChip />
+        </div>
+      </section>
+
+      <section className="mb-6 rounded-2xl border border-line bg-surface p-4 text-sm">
+        <h2 className="mb-2 font-bold">🧪 Kiểm tra ứng dụng</h2>
+        <Link href="/coach/selftest" className="font-semibold text-accent">
+          Tự kiểm tra Gai Coach →
+        </Link>
       </section>
     </main>
   );

@@ -54,9 +54,23 @@ Mỗi lần push, tab **Actions** trên GitHub sẽ chạy CI. Dấu ✓ xanh l�
 
 > Gợi ý: nếu sau này muốn tách, có thể dùng `app.thuankhoi.com` cho ứng dụng và `thuankhoi.com` cho trang giới thiệu.
 
-## 4. Supabase – tài khoản người dùng (khi cần)
+## 4. Gai AI – bật Claude cho Gai Coach (tùy chọn)
 
-App vẫn chạy được khi chưa có bước này; chỉ tắt phần đăng nhập.
+Không có bước này, Gai Coach vẫn chạy ở **chế độ cơ bản** (thư viện tình huống, ngay trên máy).
+
+1. Tạo API key tại https://platform.claude.com (mục API Keys), nạp tiền theo mức dùng.
+2. Vercel → Project → **Settings → Environment Variables**, thêm:
+   - `ANTHROPIC_API_KEY` = khóa vừa tạo (**chỉ** đặt ở đây, không đưa vào code hay GitHub)
+   - (tùy chọn) `COACH_LIMIT_PER_HOUR` = số lượt hỏi tối đa mỗi giờ cho mỗi người, mặc định 30
+   - (tùy chọn) `COACH_MODEL` = mô hình Claude, mặc định `claude-opus-5-5`
+3. **Redeploy**. Mở **Hồ sơ → Tự kiểm tra Gai Coach → Thử Gai AI** để kiểm tra 3 câu hỏi mẫu.
+
+Thử trên máy: thêm `ANTHROPIC_API_KEY=...` vào `apps/web/.env.local` rồi chạy lại `npm run dev`.
+
+## 5. Supabase – tài khoản và đồng bộ (KHÔNG bắt buộc)
+
+App chạy đầy đủ khi không có Supabase: dữ liệu lưu ngay trên điện thoại, chuyển máy bằng **Hồ sơ → Sao lưu dữ liệu**.
+Chỉ cần Supabase khi muốn: đăng nhập, tự đồng bộ giữa nhiều máy, hoặc bán gói trả phí cho nhiều người.
 
 1. Tạo project tại https://supabase.com (chọn vùng Singapore cho gần Việt Nam).
 2. **SQL Editor** → dán nội dung `supabase/migrations/0001_profiles.sql` → **Run**.
@@ -70,12 +84,12 @@ App vẫn chạy được khi chưa có bước này; chỉ tắt phần đăng 
 
 > Không bao giờ đưa `service_role key` vào app hay lên GitHub. File `.env.local` đã được loại khỏi git.
 
-## 5. Cài app lên điện thoại
+## 6. Cài app lên điện thoại
 
 - **iPhone (Safari)**: mở https://thuankhoi.com → nút Chia sẻ → **Thêm vào MH chính**.
 - **Android (Chrome)**: mở trang → menu ⋮ → **Cài đặt ứng dụng** / **Thêm vào màn hình chính**.
 
-## 6. Quy trình làm việc hằng ngày
+## 7. Quy trình làm việc hằng ngày
 
 ```bash
 npm run check

@@ -10,7 +10,9 @@
     "icons": "node scripts/gen-icons.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.4.0",
     "@gai/calibration": "*",
+    "@gai/coach": "*",
     "@gai/gt-core": "*",
     "@gai/learning": "*",
     "@gai/schema": "*",

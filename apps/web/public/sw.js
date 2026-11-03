@@ -1,7 +1,7 @@
 // Service worker: cho phép mở app khi mất mạng.
 // Đổi CACHE khi muốn ép xóa bộ nhớ đệm cũ.
-const CACHE = "gai-v4";
-const PRECACHE = ["/", "/lab", "/learn", "/journal", "/profile", "/analyze", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
+const CACHE = "gai-v5";
+const PRECACHE = ["/", "/lab", "/learn", "/journal", "/profile", "/analyze", "/coach", "/manifest.webmanifest", "/icons/icon-192.png", "/icons/icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((c) => c.addAll(PRECACHE)).then(() => self.skipWaiting()));

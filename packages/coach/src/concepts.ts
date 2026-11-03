@@ -1,0 +1,103 @@
+/** Từ điển khái niệm: Gai giải thích ngắn gọn bằng lời dễ hiểu, kèm bài học để học kỹ. */
+export type Concept = { id: string; term: string; keywords: string[]; explain: string; lesson: string };
+
+export const CONCEPTS: Concept[] = [
+  {
+    id: "nash",
+    term: "Cân bằng Nash",
+    keywords: ["can bang nash", "nash"],
+    explain: "Là kết quả mà **không ai muốn tự mình đổi lựa chọn**, khi người kia giữ nguyên. Không nhất thiết là kết quả tốt nhất cho cả hai.",
+    lesson: "1-can-bang-nash",
+  },
+  {
+    id: "troi",
+    term: "Chiến lược trội",
+    keywords: ["chien luoc troi", "troi"],
+    explain: "Là lựa chọn **tốt hơn mọi lựa chọn khác, dù đối phương làm gì**. Có nó thì không cần đoán đối phương.",
+    lesson: "1-chien-luoc-troi",
+  },
+  {
+    id: "tu-nhan",
+    term: "Song đề tù nhân",
+    keywords: ["song de tu nhan", "tu nhan", "chia keo"],
+    explain: "Tình huống mà **mỗi bên chọn điều tốt nhất cho mình** nhưng **kết quả chung lại tệ hơn** khi hợp tác. Ví dụ hai quán cùng giảm giá.",
+    lesson: "1-chien-luoc-troi",
+  },
+  {
+    id: "ky-vong",
+    term: "Giá trị kỳ vọng",
+    keywords: ["gia tri ky vong", "ky vong", "trung binh"],
+    explain: "Là **trung bình bạn nhận được nếu làm rất nhiều lần**: nhân mỗi kết quả với khả năng của nó rồi cộng lại.",
+    lesson: "0a-ky-vong",
+  },
+  {
+    id: "xac-suat",
+    term: "Xác suất",
+    keywords: ["xac suat", "kha nang"],
+    explain: "Cho biết một việc **dễ xảy ra đến mức nào**, từ 0 (không bao giờ) đến 1 (chắc chắn). Đếm: số cách mình muốn chia tổng số cách.",
+    lesson: "0a-xac-suat",
+  },
+  {
+    id: "co-hoi",
+    term: "Chi phí cơ hội",
+    keywords: ["chi phi co hoi"],
+    explain: "Là **thứ tốt nhất bạn bỏ lỡ** khi chọn một thứ. Hỏi: \"Nếu không làm việc này, mình sẽ làm gì?\"",
+    lesson: "0-chi-phi-co-hoi",
+  },
+  {
+    id: "chim",
+    term: "Chi phí chìm",
+    keywords: ["chi phi chim"],
+    explain: "Là thứ **đã bỏ ra và không lấy lại được**. Quyết định tốt chỉ nhìn **từ giờ trở đi**.",
+    lesson: "0-chi-phi-chim",
+  },
+  {
+    id: "nguoc",
+    term: "Nghĩ ngược từ cuối",
+    keywords: ["nghi nguoc", "suy luan nguoc", "backward induction"],
+    explain: "Trong trò chơi lần lượt, bắt đầu từ **nước đi cuối cùng**: người chọn cuối sẽ làm gì? Rồi lùi dần lên đầu.",
+    lesson: "2-nghi-nguoc",
+  },
+  {
+    id: "doa",
+    term: "Lời đe dọa đáng tin",
+    keywords: ["de doa", "loi doa", "doa dang tin"],
+    explain: "Lời dọa chỉ có tác dụng nếu **đến lúc phải làm, người dọa thật sự có lợi khi làm**. Nếu không, đó là lời dọa suông.",
+    lesson: "2-loi-doa",
+  },
+  {
+    id: "cam-ket",
+    term: "Cam kết",
+    keywords: ["cam ket", "troi tay"],
+    explain: "Tự bỏ bớt lựa chọn (ví dụ heo đất, hợp đồng) để **lời nói của mình trở nên đáng tin**. Cần công khai và không rút lại được.",
+    lesson: "2-cam-ket",
+  },
+  {
+    id: "tft",
+    term: "Ăn miếng trả miếng",
+    keywords: ["an mieng tra mieng", "tit for tat"],
+    explain: "Chiến lược cho trò chơi lặp lại: **vòng đầu hợp tác**, sau đó **làm giống đối phương** ở vòng trước. Tử tế, biết đáp trả, biết tha thứ.",
+    lesson: "3-an-mieng",
+  },
+  {
+    id: "tin-hieu",
+    term: "Tín hiệu",
+    keywords: ["tin hieu", "signal"],
+    explain: "Hành động **tốn kém đến mức kẻ giả không muốn bắt chước**, nên đáng tin hơn lời nói. Ví dụ bảo hành dài.",
+    lesson: "4-tin-hieu",
+  },
+  {
+    id: "nguyen",
+    term: "Lời nguyền người thắng",
+    keywords: ["loi nguyen nguoi thang", "winner s curse"],
+    explain: "Khi mọi người cùng đoán giá trị một món, **người thắng đấu giá thường là người đoán cao quá tay nhất**, nên dễ trả quá đắt.",
+    lesson: "5-loi-nguyen",
+  },
+  {
+    id: "brier",
+    term: "Điểm Brier",
+    keywords: ["brier", "diem chinh xac"],
+    explain: "Điểm đo độ chính xác của dự đoán có xác suất: **càng gần 0 càng tốt**, luôn đoán 50% thì được 0,25.",
+    lesson: "0-thien-kien",
+  },
+];
