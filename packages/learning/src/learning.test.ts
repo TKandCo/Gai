@@ -10,6 +10,11 @@ import {
   isPass,
   nashAnswer,
   treeAnswer,
+  placementQuestions,
+  placementResult,
+  PLACEMENT_LEVELS,
+  PLACEMENT_PER_LEVEL,
+  badges,
   nextLesson,
   parseAnswer,
   pickPractice,
@@ -196,5 +201,43 @@ describe("Ôn tập", () => {
     expect(qs[0].id).toBe(first.quiz[3].id);
     expect(qs.every((q) => first.quiz.includes(q))).toBe(true);
     expect(pickPractice(LEVELS, emptyProgress())).toEqual([]);
+  });
+});
+
+describe("Bài xếp lớp", () => {
+  it("lấy 3 câu mỗi cấp cho 4 cấp đầu, theo thứ tự cấp", () => {
+    const qs = placementQuestions(LEVELS);
+    expect(qs).toHaveLength(PLACEMENT_LEVELS * PLACEMENT_PER_LEVEL);
+    const levelOf = (id: string) => ALL_LESSONS.find((l) => l.quiz.some((q) => q.id === id))!.levelId;
+    expect(qs.slice(0, 3).every((q) => levelOf(q.id) === LEVELS[0].id)).toBe(true);
+    expect(qs.slice(9).every((q) => levelOf(q.id) === LEVELS[3].id)).toBe(true);
+  });
+
+  it("vượt lần lượt các cấp đạt ≥ 2/3, dừng ở cấp đầu tiên chưa đạt", () => {
+    const qs = placementQuestions(LEVELS);
+    const answers = qs.map((q, i) => ({ id: q.id, ok: i < 3 || (i >= 3 && i < 5) }));
+    // Cấp 1: 3/3, cấp 2: 2/3, cấp 3: 0/3 → vượt 2 cấp đầu
+    expect(placementResult(LEVELS, answers)).toEqual([LEVELS[0].id, LEVELS[1].id]);
+    expect(placementResult(LEVELS, qs.map((q) => ({ id: q.id, ok: false })))).toEqual([]);
+    // Cấp sau đạt nhưng cấp trước chưa đạt thì vẫn dừng
+    const gap = qs.map((q, i) => ({ id: q.id, ok: i >= 3 }));
+    expect(placementResult(LEVELS, gap)).toEqual([]);
+  });
+});
+
+describe("Huy hiệu", () => {
+  it("chưa học gì thì chưa có huy hiệu", () => {
+    expect(badges(LEVELS, emptyProgress(), { predictions: 0, resolved: 0 }).filter((b) => b.earned)).toEqual([]);
+  });
+
+  it("qua bài đầu với 5/5 và ghi dự đoán thì có 3 huy hiệu", () => {
+    const p = recordLessonResult(emptyProgress(), LEVELS[0].lessons[0].id, 5, 5);
+    const got = badges(LEVELS, p, { predictions: 1, resolved: 0 }).filter((b) => b.earned).map((b) => b.id);
+    expect(got).toEqual(["first-lesson", "perfect", "predict"]);
+  });
+
+  it("vượt cấp thì có huy hiệu cấp đó", () => {
+    const p = recordLevelSkip(emptyProgress(), LEVELS[0].id);
+    expect(badges(LEVELS, p, { predictions: 0, resolved: 0 }).find((b) => b.id === `level-${LEVELS[0].id}`)!.earned).toBe(true);
   });
 });

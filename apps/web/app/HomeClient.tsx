@@ -7,6 +7,7 @@ import { useJournal } from "@/lib/journal";
 import { today } from "@gai/learning";
 import { Mascot } from "@/components/Mascot";
 import { HelpButton } from "@/components/Help";
+import { Badges } from "@/components/Badges";
 
 const HELP = [
   { icon: "📚", text: "Bấm \"Học\" ở dưới cùng để học từng bài ngắn. Làm đúng câu đố sẽ mở bài mới." },
@@ -55,6 +56,10 @@ export function HomeClient() {
         <Stat value={`${streak}🔥`} label="ngày liên tiếp" />
         <Stat value={`${passed}/${ALL_LESSONS.length}`} label="bài đã qua" />
         <Stat value={`${items.length}`} label="dự đoán" />
+      </div>
+
+      <div className="mb-4">
+        <Badges compact />
       </div>
 
       {next ? (

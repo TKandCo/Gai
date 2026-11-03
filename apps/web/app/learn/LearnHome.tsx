@@ -11,6 +11,7 @@ const HELP = [
   { icon: "🔒", text: "Bài có ổ khóa sẽ mở khi bạn làm đúng ít nhất 4/5 câu đố của bài trước." },
   { icon: "🔁", text: "\"Luyện tập hôm nay\" giúp ôn lại câu cũ, nhất là những câu từng làm sai." },
   { icon: "🚀", text: "Đã biết phần nào rồi? Bấm \"Kiểm tra vượt cấp\" để nhảy qua cả cấp đó." },
+  { icon: "📖", text: "Làm xong câu đố sẽ mở phần Giải đáp: đáp án, lời giải và điều cần ghi nhớ." },
 ];
 
 export function LearnHome() {
@@ -47,6 +48,16 @@ export function LearnHome() {
           <div className="font-semibold leading-snug">{practiceCount > 0 ? `${practiceCount} câu ôn` : "Học 1 bài để mở"}</div>
         </Link>
       </div>
+
+      {ready && Object.keys(progress.lessons).length === 0 && progress.levelsSkipped.length === 0 && (
+        <Link href="/learn/placement" className="mb-6 flex items-center gap-3 rounded-2xl border-2 border-nash bg-nash-soft p-4">
+          <span className="text-3xl">🧭</span>
+          <span>
+            <span className="block font-semibold">Làm bài xếp lớp (12 câu)</span>
+            <span className="block text-sm text-muted">Đã biết một chút? Gai sẽ mở sẵn những phần bạn đã biết.</span>
+          </span>
+        </Link>
+      )}
 
       <div className="space-y-8">
         {LEVELS.map((level) => {
@@ -133,8 +144,8 @@ export function LearnHome() {
         })}
 
         <section className="rounded-2xl bg-surface-2 p-4 text-sm text-muted">
-          <p className="font-semibold text-ink">Sắp có</p>
-          <p className="mt-1">Cấp 4: Thông tin bị giấu (tín hiệu, đoán ý đối phương).</p>
+          <p className="font-semibold text-ink">Tiếp theo</p>
+          <p className="mt-1">Bàn phân tích sự kiện: dùng mọi điều đã học để phân tích một tin tức thật, từng bước một.</p>
         </section>
       </div>
     </main>

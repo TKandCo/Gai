@@ -5,6 +5,7 @@ import { useProfiles } from "@/lib/profiles";
 import { PageHeader } from "@/components/PageHeader";
 import { ProfileForm } from "@/components/ProfileForm";
 import { AccountChip } from "@/components/AccountChip";
+import { Badges } from "@/components/Badges";
 
 export default function ProfilePage() {
   const { profiles, active, switchProfile, addProfile, removeProfile, updateProfile, theme, setTheme } = useProfiles();
@@ -66,6 +67,13 @@ export default function ProfilePage() {
           </button>
         )}
       </section>
+
+      {active && (
+        <section className="mb-6 rounded-2xl border border-line bg-surface p-4">
+          <h2 className="mb-1 font-bold">🏅 Huy hiệu của {active.name}</h2>
+          <Badges />
+        </section>
+      )}
 
       {active && (
         <section className="mb-6 rounded-2xl border border-line bg-surface p-4">

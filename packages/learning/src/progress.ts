@@ -12,7 +12,8 @@ export type Progress = {
   /** Các cấp đã vượt qua bằng bài kiểm tra vượt cấp */
   levelsSkipped: string[];
   review: Record<string, ReviewCard>;
-  streak: { last: string | null; count: number };
+  /** best = chuỗi dài nhất từng đạt (để huy hiệu không mất khi chuỗi bị đứt) */
+  streak: { last: string | null; count: number; best?: number };
 };
 
 export const emptyProgress = (): Progress => ({
@@ -78,7 +79,8 @@ export function nextLesson(levels: Level[], p: Progress) {
 function bumpStreak(p: Progress, day: string): Progress["streak"] {
   if (p.streak.last === day) return p.streak;
   const continues = p.streak.last === addDays(day, -1);
-  return { last: day, count: continues ? p.streak.count + 1 : 1 };
+  const count = continues ? p.streak.count + 1 : 1;
+  return { last: day, count, best: Math.max(count, p.streak.best ?? 0) };
 }
 
 export function recordLessonResult(p: Progress, lessonId: string, score: number, total: number, day = today()): Progress {
