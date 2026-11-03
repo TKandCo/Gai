@@ -1,34 +1,51 @@
-# Triển khai: GitHub → Vercel → thuankhoi.com
+# Triển khai lên thuankhoi.com
 
-Sơ đồ:
+Cách đang dùng: **GitHub Pages** (miễn phí, không cần tài khoản nào khác ngoài GitHub).
 
 ```
-Máy của bạn ──git push──▶ GitHub ──tự động──▶ Vercel ──▶ https://thuankhoi.com
-                             │
-                             └─ CI: kiểm tra kiểu, test, build
-Supabase (tài khoản + dữ liệu) ◀── app gọi tới
+Máy của bạn ──git push──▶ GitHub (TKandCo/Gai) ──Actions: test + build tĩnh──▶ GitHub Pages ──▶ https://thuankhoi.com
 ```
 
-Sau khi thiết lập một lần, mỗi thay đổi chỉ cần `git push`, Vercel tự build và cập nhật website trong vài phút.
+Mỗi thay đổi chỉ cần `git push`; khoảng 2–3 phút sau website tự cập nhật. Xem tiến trình ở tab **Actions**.
+
+Trên GitHub Pages không có máy chủ, nên **Gai AI tự tắt** (Gai chế độ cơ bản vẫn chạy đầy đủ). Muốn bật Gai AI thì dùng Phương án B (Vercel) bên dưới, code giữ nguyên.
 
 ---
 
-## 1. GitHub (một lần)
+## 1. GitHub Pages (một lần)
 
-1. Tạo kho **Private** trên GitHub, ví dụ `gai` (không tích tạo README).
-2. Trong thư mục dự án:
+1. Kho đã có: https://github.com/TKandCo/Gai. Với tài khoản GitHub miễn phí, kho phải **Public**:
+   **Settings → General → Danger Zone → Change repository visibility → Public**.
+2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Vào tab **Actions** → chọn **Deploy GitHub Pages** → **Run workflow** (hoặc đẩy một commit mới). Đợi dấu ✓ xanh.
+4. **Settings → Pages → Custom domain**: nhập `thuankhoi.com` → **Save**.
+5. Ở nơi quản lý tên miền thuankhoi.com, tạo các bản ghi DNS (xóa bản ghi `A`/`CNAME` cũ của `@` và `www` nếu có):
+
+| Loại | Tên | Giá trị |
+|------|-----|---------|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `tkandco.github.io` |
+
+6. Đợi DNS cập nhật (vài phút đến vài giờ), quay lại **Settings → Pages**, khi kiểm tra DNS xong thì tích **Enforce HTTPS**.
+
+Thử bản tĩnh trên máy trước khi đẩy:
 
 ```bash
-git remote add origin https://github.com/<tên-github>/gai.git
+npm run build:static
 ```
 
 ```bash
-git push -u origin main
+node apps/web/scripts/serve-static.mjs
 ```
 
-Mỗi lần push, tab **Actions** trên GitHub sẽ chạy CI. Dấu ✓ xanh là code ổn.
+Rồi mở http://localhost:3200.
 
-## 2. Vercel (một lần)
+---
+
+## Phương án B: Vercel (khi muốn bật Gai AI)
 
 1. Đăng nhập https://vercel.com bằng tài khoản GitHub.
 2. **Add New → Project** → chọn kho `gai`.
@@ -39,7 +56,7 @@ Mỗi lần push, tab **Actions** trên GitHub sẽ chạy CI. Dấu ✓ xanh l�
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 5. **Deploy**. Bạn sẽ có địa chỉ tạm dạng `gai-xxx.vercel.app`.
 
-## 3. Tên miền thuankhoi.com (một lần)
+### Tên miền khi dùng Vercel
 
 1. Vercel → Project → **Settings → Domains** → thêm `thuankhoi.com` và `www.thuankhoi.com`.
 2. Vercel hiển thị các bản ghi DNS cần tạo. Vào trang quản lý tên miền (nơi bạn mua thuankhoi.com) và tạo **đúng giá trị Vercel hiển thị**. Thường là:
@@ -54,7 +71,7 @@ Mỗi lần push, tab **Actions** trên GitHub sẽ chạy CI. Dấu ✓ xanh l�
 
 > Gợi ý: nếu sau này muốn tách, có thể dùng `app.thuankhoi.com` cho ứng dụng và `thuankhoi.com` cho trang giới thiệu.
 
-## 4. Gai AI – bật Claude cho Gai Coach (tùy chọn)
+## Gai AI – bật Claude cho Gai Coach (chỉ trên Vercel)
 
 Không có bước này, Gai Coach vẫn chạy ở **chế độ cơ bản** (thư viện tình huống, ngay trên máy).
 
@@ -67,7 +84,7 @@ Không có bước này, Gai Coach vẫn chạy ở **chế độ cơ bản** (t
 
 Thử trên máy: thêm `ANTHROPIC_API_KEY=...` vào `apps/web/.env.local` rồi chạy lại `npm run dev`.
 
-## 5. Supabase – tài khoản và đồng bộ (KHÔNG bắt buộc)
+## Supabase – tài khoản và đồng bộ (KHÔNG bắt buộc)
 
 App chạy đầy đủ khi không có Supabase: dữ liệu lưu ngay trên điện thoại, chuyển máy bằng **Hồ sơ → Sao lưu dữ liệu**.
 Chỉ cần Supabase khi muốn: đăng nhập, tự đồng bộ giữa nhiều máy, hoặc bán gói trả phí cho nhiều người.
@@ -84,12 +101,12 @@ Chỉ cần Supabase khi muốn: đăng nhập, tự đồng bộ giữa nhiều
 
 > Không bao giờ đưa `service_role key` vào app hay lên GitHub. File `.env.local` đã được loại khỏi git.
 
-## 6. Cài app lên điện thoại
+## Cài app lên điện thoại
 
 - **iPhone (Safari)**: mở https://thuankhoi.com → nút Chia sẻ → **Thêm vào MH chính**.
 - **Android (Chrome)**: mở trang → menu ⋮ → **Cài đặt ứng dụng** / **Thêm vào màn hình chính**.
 
-## 7. Quy trình làm việc hằng ngày
+## Quy trình làm việc hằng ngày
 
 ```bash
 npm run check

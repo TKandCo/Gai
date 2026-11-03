@@ -4,7 +4,7 @@
 
 - Website: https://thuankhoi.com
 - Kiến trúc: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- Triển khai (GitHub, Vercel, tên miền, Supabase): [docs/DEPLOY.md](docs/DEPLOY.md)
+- Triển khai (GitHub Pages, tên miền; Vercel khi cần Gai AI): [docs/DEPLOY.md](docs/DEPLOY.md)
 
 ## Chạy trên máy
 

@@ -1,9 +1,7 @@
-# Mỗi lần đẩy code lên GitHub: kiểm tra kiểu, chạy test bộ giải và build thử.
+# Kiểm tra cho pull request (bản đưa lên mạng do pages.yml lo).
 name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
 
 jobs:

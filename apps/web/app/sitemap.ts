@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+
+export const dynamic = "force-static";
 import { ALL_LESSONS } from "@gai/learning";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thuankhoi.com";
