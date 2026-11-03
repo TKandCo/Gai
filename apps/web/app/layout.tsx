@@ -35,11 +35,16 @@ export const viewport: Viewport = {
 // Áp giao diện đã chọn trước khi trang hiện ra, để không bị nháy màu
 const themeScript = `try{if(JSON.parse(localStorage.getItem("gai.theme"))==="dark")document.documentElement.dataset.theme="dark"}catch(e){}`;
 
+// Ngay sau khi cập nhật bản mới, trình duyệt có thể còn giữ trang cũ trỏ tới file JS đã bị thay.
+// Gặp lỗi tải file như vậy thì tự tải lại trang một lần (tối đa 1 lần mỗi 30 giây, tránh lặp vô hạn).
+const chunkReloadScript = `(function(){function bad(m){return /ChunkLoadError|Loading chunk|Failed to fetch dynamically imported module/i.test(String(m||""))}function go(){try{var k="gai.chunkReload",t=Number(sessionStorage.getItem(k)||0);if(Date.now()-t<30000)return;sessionStorage.setItem(k,String(Date.now()))}catch(e){}location.reload()}window.addEventListener("error",function(e){if(bad(e.message)||bad(e.error&&e.error.name))go()});window.addEventListener("unhandledrejection",function(e){var r=e.reason;if(bad(r&&(r.name||r.message)))go()})})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi" className={font.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: chunkReloadScript }} />
       </head>
       <body className="min-h-dvh font-sans antialiased">
         <ProfileProvider>
