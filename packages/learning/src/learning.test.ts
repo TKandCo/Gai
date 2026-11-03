@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { allNodes, backwardInduction } from "@gai/gt-core";
 import {
   ALL_LESSONS,
   LEVELS,
@@ -8,6 +9,7 @@ import {
   isLessonUnlocked,
   isPass,
   nashAnswer,
+  treeAnswer,
   nextLesson,
   parseAnswer,
   pickPractice,
@@ -43,6 +45,16 @@ describe("Nội dung bài học hợp lệ", () => {
             expect(new Set(q.options).size).toBe(q.options.length);
           }
           if (q.kind === "nash") expect(nashAnswer(q.game).length).toBeGreaterThan(0);
+          if (q.kind === "tree") {
+            // Đáp án phải duy nhất: không có nhánh nào bằng điểm nhau
+            expect(backwardInduction(q.tree.root).hasTie).toBe(false);
+            expect(treeAnswer(q.tree)).toBeTruthy();
+          }
+          const tree = q.tree;
+          if (tree) {
+            const ids = allNodes(tree.root).map((n) => n.id);
+            expect(new Set(ids).size).toBe(ids.length);
+          }
           if (q.game) {
             expect(q.game.payoffs).toHaveLength(q.game.rows.length);
             q.game.payoffs.forEach((r) => expect(r).toHaveLength(q.game!.cols.length));
@@ -53,7 +65,25 @@ describe("Nội dung bài học hợp lệ", () => {
   }
 });
 
+describe("Thẻ cây trò chơi", () => {
+  it("cây được giải sẵn trong bài không có nhánh bằng điểm, mã nút không trùng", () => {
+    for (const l of ALL_LESSONS)
+      for (const c of l.cards)
+        if (c.kind === "tree") {
+          const ids = allNodes(c.tree.root).map((n) => n.id);
+          expect(new Set(ids).size, l.id).toBe(ids.length);
+          if (c.solve) expect(backwardInduction(c.tree.root).hasTie, l.id).toBe(false);
+        }
+  });
+});
+
 describe("Chấm câu trả lời", () => {
+  it("câu cây trò chơi: chạm đúng lá", () => {
+    const q = ALL_LESSONS.flatMap((l) => l.quiz).find((x) => x.id === "2-nn-2")!;
+    expect(checkAnswer(q, { kind: "tree", leafId: "l1" })).toBe(true);
+    expect(checkAnswer(q, { kind: "tree", leafId: "l4" })).toBe(false);
+  });
+
   it("đọc nhiều cách viết số", () => {
     expect(parseAnswer("1/3")).toBeCloseTo(1 / 3);
     expect(parseAnswer("0,25")).toBe(0.25);
@@ -109,6 +139,14 @@ describe("Mở khóa và tiến độ", () => {
     p = recordLessonResult(p, first.id, 1, 5);
     expect(p.lessons[first.id].passed).toBe(true);
     expect(p.lessons[first.id].best).toBe(5);
+  });
+
+  it("cấp đã từng học vẫn mở dù có cấp mới chèn vào trước", () => {
+    const later = LEVELS[2];
+    const p = recordLessonResult(emptyProgress(), later.lessons[0].id, 5, 5);
+    expect(isLessonUnlocked(LEVELS, later.lessons[0].id, p)).toBe(true);
+    expect(isLessonUnlocked(LEVELS, later.lessons[1].id, p)).toBe(true);
+    expect(isLessonUnlocked(LEVELS, later.lessons[2].id, p)).toBe(false);
   });
 
   it("vượt cấp mở toàn bộ cấp đó và cấp tiếp theo", () => {

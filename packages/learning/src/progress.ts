@@ -54,9 +54,15 @@ export function isLessonUnlocked(levels: Level[], lessonId: string, p: Progress)
   return false;
 }
 
+/**
+ * Cấp mở khi mọi cấp trước đã xong. Ngoài ra, cấp đã từng học (có bài đạt) hoặc đã vượt
+ * vẫn giữ mở, để khi thêm cấp mới vào giữa lộ trình, người học không bị khóa lại.
+ */
 export function isLevelUnlocked(levels: Level[], levelId: string, p: Progress): boolean {
   const li = levels.findIndex((l) => l.id === levelId);
   if (li <= 0) return li === 0;
+  const level = levels[li];
+  if (p.levelsSkipped.includes(level.id) || level.lessons.some((l) => p.lessons[l.id]?.passed)) return true;
   return levels.slice(0, li).every((l) => isLevelComplete(l, p));
 }
 

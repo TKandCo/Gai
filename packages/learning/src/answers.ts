@@ -1,5 +1,5 @@
-import { pureNash } from "@gai/gt-core";
-import type { Exercise, MiniGame } from "./types";
+import { backwardInduction, pureNash } from "@gai/gt-core";
+import type { Exercise, MiniGame, MiniTree } from "./types";
 
 /** Đọc số người dùng gõ: chấp nhận "0,5", "0.5", "1/2", "50%". */
 export function parseAnswer(raw: string): number | null {
@@ -25,7 +25,12 @@ export function nashAnswer(game: MiniGame): [number, number][] {
   });
 }
 
-export type Response = { kind: "choice"; index: number } | { kind: "number"; raw: string } | { kind: "nash"; cells: [number, number][] };
+export function treeAnswer(tree: MiniTree): string {
+  return backwardInduction(tree.root).leafId;
+}
+
+export type Response = { kind: "choice"; index: number } | { kind: "number"; raw: string } | { kind: "nash"; cells: [number, number][] }
+  | { kind: "tree"; leafId: string };
 
 export function checkAnswer(ex: Exercise, r: Response): boolean {
   if (ex.kind === "choice" && r.kind === "choice") return r.index === ex.answer;
@@ -43,5 +48,6 @@ export function checkAnswer(ex: Exercise, r: Response): boolean {
     const got = new Set(r.cells.map(key));
     return want.size === got.size && [...want].every((k) => got.has(k));
   }
+  if (ex.kind === "tree" && r.kind === "tree") return r.leafId === treeAnswer(ex.tree);
   return false;
 }

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { checkAnswer, nashAnswer, type Exercise, type Response } from "@gai/learning";
+import { useEffect, useRef, useState } from "react";
+import { checkAnswer, nashAnswer, treeAnswer, type Exercise, type Response } from "@gai/learning";
 import { MiniMatrix } from "./MiniMatrix";
+import { TreeView } from "./TreeView";
 import { RichText } from "../RichText";
 
 const CHEERS = ["Giỏi quá! 🎉", "Chính xác! ⭐", "Tuyệt vời! 🙌", "Đúng rồi! 💪"];
@@ -22,6 +23,12 @@ export function QuizRunner({ questions, onAnswer, onFinish }: Props) {
   const [score, setScore] = useState(0);
   const [result, setResult] = useState<boolean | null>(null);
   const q = questions[idx];
+  const feedbackRef = useRef<HTMLDivElement>(null);
+
+  // Trả lời xong thì tự cuộn tới phần giải thích (trên điện thoại hay bị khuất)
+  useEffect(() => {
+    if (result !== null) feedbackRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [result]);
 
   const submit = (r: Response) => {
     const ok = checkAnswer(q, r);
@@ -58,10 +65,11 @@ export function QuizRunner({ questions, onAnswer, onFinish }: Props) {
         {q.kind === "choice" && <ChoiceQ q={q} locked={result !== null} onSubmit={submit} />}
         {q.kind === "number" && <NumberQ q={q} locked={result !== null} onSubmit={submit} />}
         {q.kind === "nash" && <NashQ q={q} locked={result !== null} onSubmit={submit} />}
+        {q.kind === "tree" && <TreeQ q={q} locked={result !== null} onSubmit={submit} />}
       </div>
 
       {result !== null && (
-        <div className={`animate-pop rounded-2xl p-4 ${result ? "bg-good-soft" : "bg-bad-soft"}`} role="status">
+        <div ref={feedbackRef} className={`animate-pop mb-4 scroll-mb-24 rounded-2xl p-4 ${result ? "bg-good-soft" : "bg-bad-soft"}`} role="status">
           <p className={`mb-1 text-lg font-bold ${result ? "text-good" : "text-bad"}`}>
             {result ? CHEERS[idx % CHEERS.length] : COMFORT[idx % COMFORT.length]}
           </p>
@@ -88,6 +96,7 @@ function ChoiceQ({
   return (
     <div className="space-y-3">
       {q.game && <MiniMatrix game={q.game} />}
+      {q.tree && <TreeView tree={q.tree} />}
       <div className="space-y-2">
         {q.options.map((o, i) => {
           let cls = "border-line bg-surface";
@@ -134,6 +143,7 @@ function NumberQ({
       className="space-y-3"
     >
       {q.game && <MiniMatrix game={q.game} />}
+      {q.tree && <TreeView tree={q.tree} />}
       <input
         value={raw}
         onChange={(e) => setRaw(e.target.value)}
@@ -181,6 +191,39 @@ function NashQ({
         <button
           disabled={cells.length === 0}
           onClick={() => onSubmit({ kind: "nash", cells })}
+          className="h-12 w-full rounded-2xl bg-accent font-bold text-accent-ink disabled:opacity-40"
+        >
+          Kiểm tra
+        </button>
+      )}
+    </div>
+  );
+}
+
+function TreeQ({
+  q,
+  locked,
+  onSubmit,
+}: {
+  q: Extract<Exercise, { kind: "tree" }>;
+  locked: boolean;
+  onSubmit: (r: Response) => void;
+}) {
+  const [leaf, setLeaf] = useState<string | null>(null);
+  return (
+    <div className="space-y-3">
+      <TreeView
+        tree={q.tree}
+        solve={locked}
+        selectedLeaf={leaf}
+        onLeafClick={locked ? undefined : setLeaf}
+        correctLeaf={locked ? treeAnswer(q.tree) : undefined}
+      />
+      <p className="text-center text-xs text-muted">Gợi ý: bắt đầu từ người chọn cuối cùng, nghĩ ngược lên trên.</p>
+      {!locked && (
+        <button
+          disabled={!leaf}
+          onClick={() => leaf && onSubmit({ kind: "tree", leafId: leaf })}
           className="h-12 w-full rounded-2xl bg-accent font-bold text-accent-ink disabled:opacity-40"
         >
           Kiểm tra

@@ -15,6 +15,7 @@ import {
 import { useProfiles } from "@/lib/profiles";
 import { RichText } from "@/components/RichText";
 import { MiniMatrix } from "@/components/learn/MiniMatrix";
+import { TreeView } from "@/components/learn/TreeView";
 import { QuizRunner } from "@/components/learn/QuizRunner";
 import { ResultScreen } from "@/components/learn/ResultScreen";
 import { Mascot } from "@/components/Mascot";
@@ -156,6 +157,18 @@ function CardView({ card }: { card: Card }) {
       );
     case "tip":
       return <Mascot size="lg">{<RichText text={card.body} />}</Mascot>;
+    case "tree":
+      return (
+        <div className="space-y-3">
+          {card.title && <h2 className="text-lg font-bold">{card.title}</h2>}
+          <TreeView tree={card.tree} solve={card.solve} />
+          {card.caption && (
+            <div className="rounded-2xl bg-surface-2 p-4">
+              <RichText text={card.caption} />
+            </div>
+          )}
+        </div>
+      );
     case "matrix":
       return (
         <div className="space-y-3">
