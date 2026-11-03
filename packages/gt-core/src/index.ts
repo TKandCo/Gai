@@ -1,0 +1,4 @@
+export * from "./normalForm";
+export * from "./format";
+export * from "./classics";
+export { solveLinear, combinations, EPS } from "./linalg";
