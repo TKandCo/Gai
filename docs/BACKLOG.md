@@ -24,7 +24,7 @@ Danh sách yêu cầu đã ghi nhận, làm theo thứ tự ưu tiên.
 
 ## Bước cuối
 
-- [ ] Xem 3 cảnh báo bảo mật của npm
+- [x] Vá cảnh báo bảo mật npm (0 lỗ hổng)
 - [x] Đưa lên GitHub (TKandCo/Gai), GitHub Pages tự triển khai
-- [ ] Trỏ gai.thuankhoi.com (CNAME → tkandco.github.io) và bật HTTPS
+- [x] Website chạy tại https://gai.thuankhoi.com (GitHub Pages, HTTPS, tự cập nhật mỗi lần push)
 - [ ] Nhắc giờ học / hạn dự đoán bằng thông báo trên điện thoại (cần bản đã triển khai HTTPS)
