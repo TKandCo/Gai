@@ -15,6 +15,7 @@
 | D3 | AI | Dùng Claude API, **nhưng không bắt buộc cho lõi**. Phần học, bộ giải và nhật ký chạy không cần AI. AI bật từ giai đoạn P2 | Lõi chạy offline; AI chỉ chạy qua server, có giới hạn mức dùng theo người dùng |
 | D4 | Nền toán | Đã lâu không dùng toán → **thêm module "Nền tảng toán"** và bài kiểm tra xếp lớp | Thêm Cấp 0A (mục 3.1) |
 | D5 | Ngôn ngữ | Chỉ tiếng Việt | Toàn bộ chữ trên giao diện để trong một file; bảng thuật ngữ ghi kèm tên gốc nhỏ để tra cứu thêm khi cần |
+| D7 | Đối tượng | **Cả gia đình, kể cả trẻ em** (yêu cầu 2026-11-03) | Hồ sơ gia đình trên máy, không cần email; lời lẽ đơn giản, ví dụ đời thường trước; thẻ "Áp dụng thực tế" (đầu tư) ẩn với hồ sơ dưới 15 tuổi; linh vật Gai 🦉 + nút ❓ hướng dẫn mỗi màn hình; nút lớn, chữ 17px; giao diện sáng dịu mặc định |
 | D6 | Nguồn sự kiện | Ứng dụng **tự đề xuất tin quan trọng, có khả năng áp dụng cao** | Thêm module Radar sự kiện (mục 3.7), cần server chạy theo lịch |
 
 ---

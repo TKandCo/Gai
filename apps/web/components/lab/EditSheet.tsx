@@ -26,7 +26,7 @@ export function EditSheet({ game, target, onClose, onPayoff, onRename, onRemove 
         ) : (
           <NameEditor key={JSON.stringify(target)} game={game} target={target} onRename={onRename} onRemove={onRemove} onClose={onClose} />
         )}
-        <button onClick={onClose} className="mt-5 w-full rounded-xl bg-accent py-3 font-semibold text-white dark:text-black">
+        <button onClick={onClose} className="mt-5 w-full rounded-xl bg-accent py-3 font-semibold text-accent-ink">
           Xong
         </button>
       </div>
@@ -157,7 +157,7 @@ function NameEditor({
             onRemove(kind, index);
             onClose();
           }}
-          className="mt-3 w-full rounded-xl border border-line py-2.5 text-sm text-red-600 disabled:opacity-40 dark:text-red-400"
+          className="mt-3 w-full rounded-xl border border-line py-2.5 text-sm text-bad disabled:opacity-40"
         >
           Xóa lựa chọn này {count <= MIN_ACTIONS ? "(cần tối thiểu 2)" : ""}
         </button>

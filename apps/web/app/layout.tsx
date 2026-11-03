@@ -3,6 +3,8 @@ import { Be_Vietnam_Pro } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/BottomNav";
 import { SwRegister } from "@/components/SwRegister";
+import { ProfileProvider } from "@/lib/profiles";
+import { Gate } from "@/components/Gate";
 
 const font = Be_Vietnam_Pro({
   subsets: ["vietnamese", "latin"],
@@ -14,7 +16,7 @@ const font = Be_Vietnam_Pro({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://thuankhoi.com"),
   title: { default: "GAI – Tư duy chiến lược", template: "%s · GAI" },
-  description: "Học và áp dụng lý thuyết trò chơi để ra quyết định tốt hơn.",
+  description: "Học và áp dụng lý thuyết trò chơi để ra quyết định tốt hơn. Dễ hiểu cho cả gia đình.",
   applicationName: "GAI",
   appleWebApp: { capable: true, title: "GAI", statusBarStyle: "default" },
   icons: {
@@ -27,18 +29,25 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f5f1" },
-    { media: "(prefers-color-scheme: dark)", color: "#111110" },
-  ],
+  themeColor: "#f3efe6",
 };
+
+// Áp giao diện đã chọn trước khi trang hiện ra, để không bị nháy màu
+const themeScript = `try{if(JSON.parse(localStorage.getItem("gai.theme"))==="dark")document.documentElement.dataset.theme="dark"}catch(e){}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="vi" className={font.variable}>
+    <html lang="vi" className={font.variable} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-dvh font-sans antialiased">
-        <div className="mx-auto min-h-dvh max-w-md pb-24">{children}</div>
-        <BottomNav />
+        <ProfileProvider>
+          <Gate>
+            <div className="mx-auto min-h-dvh max-w-md pb-24">{children}</div>
+            <BottomNav />
+          </Gate>
+        </ProfileProvider>
         <SwRegister />
       </body>
     </html>

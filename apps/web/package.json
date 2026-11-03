@@ -10,7 +10,9 @@
     "icons": "node scripts/gen-icons.mjs"
   },
   "dependencies": {
+    "@gai/calibration": "*",
     "@gai/gt-core": "*",
+    "@gai/learning": "*",
     "@gai/schema": "*",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.118.0",

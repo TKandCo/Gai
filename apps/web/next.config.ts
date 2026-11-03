@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@gai/gt-core", "@gai/schema"],
+  transpilePackages: ["@gai/gt-core", "@gai/schema", "@gai/learning", "@gai/calibration"],
   async headers() {
     return [
       {

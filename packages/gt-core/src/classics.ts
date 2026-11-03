@@ -45,12 +45,12 @@ export const CLASSIC_GAMES: ClassicGame[] = [
     id: "con-ga",
     title: "Trò chơi con gà",
     story:
-      "Hai xe lao vào nhau. Ai né trước là \"con gà\". Nếu cả hai lao thẳng, cả hai cùng thảm họa.",
+      "Hai bạn đạp xe ngược chiều trên một con đường hẹp. Ai né trước bị trêu là \"nhát như gà\". Nếu không ai chịu né, cả hai cùng ngã đau.",
     lesson:
-      "Ai cam kết đáng tin trước (ví dụ: tháo vô lăng ném ra ngoài) sẽ thắng. Mô tả rất đúng các cuộc leo thang căng thẳng.",
-    players: ["Tài xế A", "Tài xế B"],
-    rows: ["Né", "Lao thẳng"],
-    cols: ["Né", "Lao thẳng"],
+      "Ai cho đối phương thấy chắc chắn mình sẽ không né thì thường thắng, nhưng nếu cả hai cùng cứng đầu thì đều thiệt nặng. Mô tả rất đúng các cuộc leo thang căng thẳng.",
+    players: ["Bạn A", "Bạn B"],
+    rows: ["Né", "Đi thẳng"],
+    cols: ["Né", "Đi thẳng"],
     payoffs: [
       [[0, 0], [-1, 1]],
       [[1, -1], [-10, -10]],

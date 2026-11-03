@@ -66,7 +66,7 @@ export default function LoginPage() {
             placeholder="email@cua-ban.com"
             className="h-12 w-full rounded-xl border border-line bg-surface px-4 outline-none focus:border-accent"
           />
-          <button disabled={busy} className="h-12 w-full rounded-xl bg-accent font-semibold text-white disabled:opacity-60 dark:text-black">
+          <button disabled={busy} className="h-12 w-full rounded-xl bg-accent font-semibold text-accent-ink disabled:opacity-60">
             {busy ? "Đang gửi..." : "Gửi mã đăng nhập"}
           </button>
         </form>
@@ -83,7 +83,7 @@ export default function LoginPage() {
             placeholder="123456"
             className="h-12 w-full rounded-xl border border-line bg-surface px-4 text-center text-xl tracking-[0.4em] outline-none focus:border-accent"
           />
-          <button disabled={busy || code.trim().length < 6} className="h-12 w-full rounded-xl bg-accent font-semibold text-white disabled:opacity-60 dark:text-black">
+          <button disabled={busy || code.trim().length < 6} className="h-12 w-full rounded-xl bg-accent font-semibold text-accent-ink disabled:opacity-60">
             {busy ? "Đang kiểm tra..." : "Xác nhận"}
           </button>
           <button type="button" onClick={() => setStage("email")} className="w-full text-sm text-muted">
@@ -91,7 +91,7 @@ export default function LoginPage() {
           </button>
         </form>
       )}
-      {error && <p className="mt-3 text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p className="mt-3 text-sm text-bad">{error}</p>}
     </main>
   );
 }
