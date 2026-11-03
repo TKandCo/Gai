@@ -2,7 +2,7 @@
 
 Ứng dụng (ưu tiên điện thoại) giúp học và áp dụng lý thuyết trò chơi để phân tích sự kiện và ra quyết định.
 
-- Website: https://thuankhoi.com
+- Website: https://gai.thuankhoi.com
 - Kiến trúc: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - Triển khai (GitHub Pages, tên miền; Vercel khi cần Gai AI): [docs/DEPLOY.md](docs/DEPLOY.md)
 

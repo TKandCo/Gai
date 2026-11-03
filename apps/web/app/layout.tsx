@@ -14,7 +14,7 @@ const font = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://thuankhoi.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://gai.thuankhoi.com"),
   title: { default: "GAI – Tư duy chiến lược", template: "%s · GAI" },
   description: "Học và áp dụng lý thuyết trò chơi để ra quyết định tốt hơn. Dễ hiểu cho cả gia đình.",
   applicationName: "GAI",

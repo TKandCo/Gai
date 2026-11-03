@@ -1,9 +1,9 @@
-# Triển khai lên thuankhoi.com
+# Triển khai lên gai.thuankhoi.com
 
 Cách đang dùng: **GitHub Pages** (miễn phí, không cần tài khoản nào khác ngoài GitHub).
 
 ```
-Máy của bạn ──git push──▶ GitHub (TKandCo/Gai) ──Actions: test + build tĩnh──▶ GitHub Pages ──▶ https://thuankhoi.com
+Máy của bạn ──git push──▶ GitHub (TKandCo/Gai) ──Actions: test + build tĩnh──▶ GitHub Pages ──▶ https://gai.thuankhoi.com
 ```
 
 Mỗi thay đổi chỉ cần `git push`; khoảng 2–3 phút sau website tự cập nhật. Xem tiến trình ở tab **Actions**.
@@ -18,17 +18,14 @@ Trên GitHub Pages không có máy chủ, nên **Gai AI tự tắt** (Gai chế 
    **Settings → General → Danger Zone → Change repository visibility → Public**.
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Vào tab **Actions** → chọn **Deploy GitHub Pages** → **Run workflow** (hoặc đẩy một commit mới). Đợi dấu ✓ xanh.
-4. **Settings → Pages → Custom domain**: nhập `thuankhoi.com` → **Save**.
-5. Ở nơi quản lý tên miền thuankhoi.com, tạo các bản ghi DNS (xóa bản ghi `A`/`CNAME` cũ của `@` và `www` nếu có):
+4. **DNS ở Squarespace** (nơi quản lý thuankhoi.com): **Domains → thuankhoi.com → DNS → DNS Settings → Custom records → Add record**:
 
-| Loại | Tên | Giá trị |
-|------|-----|---------|
-| A | `@` | `185.199.108.153` |
-| A | `@` | `185.199.109.153` |
-| A | `@` | `185.199.110.153` |
-| A | `@` | `185.199.111.153` |
-| CNAME | `www` | `tkandco.github.io` |
+| Loại | Host | Giá trị (Data) |
+|------|------|----------------|
+| CNAME | `gai` | `tkandco.github.io` |
 
+   Giống hệt cách `holygrail.thuankhoi.com` đang làm. **Không** sửa bản ghi của `@`, `www`, `jenny`, `holygrail`.
+5. **Settings → Pages → Custom domain**: nhập `gai.thuankhoi.com` → **Save** → **Check again**.
 6. Đợi DNS cập nhật (vài phút đến vài giờ), quay lại **Settings → Pages**, khi kiểm tra DNS xong thì tích **Enforce HTTPS**.
 
 Thử bản tĩnh trên máy trước khi đẩy:
@@ -51,7 +48,7 @@ Rồi mở http://localhost:3200.
 2. **Add New → Project** → chọn kho `gai`.
 3. **Root Directory**: `apps/web`. Framework tự nhận là Next.js. Vercel tự cài các gói ở thư mục gốc.
 4. **Environment Variables** (để trống phần Supabase nếu chưa làm bước 4):
-   - `NEXT_PUBLIC_SITE_URL` = `https://thuankhoi.com`
+   - `NEXT_PUBLIC_SITE_URL` = `https://gai.thuankhoi.com`
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 5. **Deploy**. Bạn sẽ có địa chỉ tạm dạng `gai-xxx.vercel.app`.
@@ -95,15 +92,15 @@ Chỉ cần Supabase khi muốn: đăng nhập, tự đồng bộ giữa nhiều
    - Trên máy: tạo `apps/web/.env.local` theo mẫu `apps/web/.env.example` rồi dán vào.
    - Trên Vercel: dán vào Environment Variables rồi **Redeploy**.
 4. **Authentication → URL Configuration**:
-   - Site URL: `https://thuankhoi.com`
-   - Redirect URLs: `https://thuankhoi.com/auth/callback`, `http://localhost:3000/auth/callback`
+   - Site URL: `https://gai.thuankhoi.com`
+   - Redirect URLs: `https://gai.thuankhoi.com/auth/callback`, `http://localhost:3000/auth/callback`
 5. **Authentication → Email Templates → Magic Link**: thêm dòng `Mã đăng nhập: {{ .Token }}` vào nội dung email. Mã 6 số này giúp đăng nhập ngay trong app đã cài trên điện thoại.
 
 > Không bao giờ đưa `service_role key` vào app hay lên GitHub. File `.env.local` đã được loại khỏi git.
 
 ## Cài app lên điện thoại
 
-- **iPhone (Safari)**: mở https://thuankhoi.com → nút Chia sẻ → **Thêm vào MH chính**.
+- **iPhone (Safari)**: mở https://gai.thuankhoi.com → nút Chia sẻ → **Thêm vào MH chính**.
 - **Android (Chrome)**: mở trang → menu ⋮ → **Cài đặt ứng dụng** / **Thêm vào màn hình chính**.
 
 ## Quy trình làm việc hằng ngày

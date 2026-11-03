@@ -353,7 +353,7 @@ Content (không nằm trong DB người dùng, quản lý bằng git):
 
 ### 5.2 Cấu trúc thư mục (monorepo, npm workspaces)
 
-Triển khai: GitHub → Vercel → `thuankhoi.com` (chi tiết trong [DEPLOY.md](DEPLOY.md)).
+Triển khai: GitHub Pages → `gai.thuankhoi.com` (chi tiết trong [DEPLOY.md](DEPLOY.md)).
 
 ```
 GAMETHEORY APP/

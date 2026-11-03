@@ -1,4 +1,4 @@
-# Mỗi lần đẩy code lên nhánh main: kiểm tra, build website tĩnh, đưa lên GitHub Pages (thuankhoi.com).
+# Mỗi lần đẩy code lên nhánh main: kiểm tra, build website tĩnh, đưa lên GitHub Pages (gai.thuankhoi.com).
 name: Deploy GitHub Pages
 
 on:
@@ -29,7 +29,7 @@ jobs:
       - run: npm test
       - run: npm run build:static
         env:
-          NEXT_PUBLIC_SITE_URL: https://thuankhoi.com
+          NEXT_PUBLIC_SITE_URL: https://gai.thuankhoi.com
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/web/out

@@ -25,5 +25,6 @@ Danh sách yêu cầu đã ghi nhận, làm theo thứ tự ưu tiên.
 ## Bước cuối
 
 - [ ] Xem 3 cảnh báo bảo mật của npm
-- [ ] Đưa lên GitHub, nối Vercel và tên miền thuankhoi.com (xem `docs/DEPLOY.md`)
+- [x] Đưa lên GitHub (TKandCo/Gai), GitHub Pages tự triển khai
+- [ ] Trỏ gai.thuankhoi.com (CNAME → tkandco.github.io) và bật HTTPS
 - [ ] Nhắc giờ học / hạn dự đoán bằng thông báo trên điện thoại (cần bản đã triển khai HTTPS)

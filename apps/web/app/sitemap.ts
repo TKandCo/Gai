@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 import { ALL_LESSONS } from "@gai/learning";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thuankhoi.com";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://gai.thuankhoi.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ["", "/learn", "/lab", "/analyze", "/coach", "/journal"];
