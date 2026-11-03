@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { allNodes, backwardInduction } from "@gai/gt-core";
+import { allNodes, backwardInduction, findStrategy } from "@gai/gt-core";
 import {
   ALL_LESSONS,
   LEVELS,
@@ -63,6 +63,13 @@ describe("Nội dung bài học hợp lệ", () => {
       }
     });
   }
+});
+
+describe("Thẻ chơi lặp lại", () => {
+  it("đối thủ được nhắc tới trong bài đều tồn tại", () => {
+    for (const l of ALL_LESSONS)
+      for (const c of l.cards) if (c.kind === "repeated") expect(findStrategy(c.opponent), l.id).toBeDefined();
+  });
 });
 
 describe("Thẻ cây trò chơi", () => {

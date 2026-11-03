@@ -134,7 +134,7 @@ export function LearnHome() {
 
         <section className="rounded-2xl bg-surface-2 p-4 text-sm text-muted">
           <p className="font-semibold text-ink">Sắp có</p>
-          <p className="mt-1">Cấp 3: Trò chơi lặp lại (uy tín, hợp tác lâu dài) · Cấp 4: Thông tin bị giấu (tín hiệu, đoán ý đối phương).</p>
+          <p className="mt-1">Cấp 4: Thông tin bị giấu (tín hiệu, đoán ý đối phương).</p>
         </section>
       </div>
     </main>

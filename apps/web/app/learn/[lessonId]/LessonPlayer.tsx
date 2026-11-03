@@ -16,11 +16,13 @@ import { useProfiles } from "@/lib/profiles";
 import { RichText } from "@/components/RichText";
 import { MiniMatrix } from "@/components/learn/MiniMatrix";
 import { TreeView } from "@/components/learn/TreeView";
-import { QuizRunner } from "@/components/learn/QuizRunner";
+import { RepeatedGame } from "@/components/repeated/RepeatedGame";
+import { QuizRunner, type AnswerRecord } from "@/components/learn/QuizRunner";
+import { Review } from "@/components/learn/Review";
 import { ResultScreen } from "@/components/learn/ResultScreen";
 import { Mascot } from "@/components/Mascot";
 
-type Stage = { kind: "cards"; index: number } | { kind: "quiz"; round: number } | { kind: "done"; score: number; total: number };
+type Stage = { kind: "cards"; index: number } | { kind: "quiz"; round: number } | { kind: "done"; score: number; total: number; answers: AnswerRecord[] };
 
 export function LessonPlayer({ lessonId }: { lessonId: string }) {
   const lesson = findLesson(lessonId)!;
@@ -106,9 +108,9 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
           key={stage.round}
           questions={lesson.quiz}
           onAnswer={(q, ok) => updateProgress((p) => recordAnswer(p, q.id, ok))}
-          onFinish={(score, total) => {
+          onFinish={(score, total, answers) => {
             updateProgress((p) => recordLessonResult(p, lesson.id, score, total));
-            setStage({ kind: "done", score, total });
+            setStage({ kind: "done", score, total, answers });
           }}
         />
       </main>
@@ -125,6 +127,7 @@ export function LessonPlayer({ lessonId }: { lessonId: string }) {
         failText="Gần được rồi! Đọc lại phần giải thích rồi thử lần nữa nhé."
         primary={after ? { href: `/learn/${after.id}`, label: `Học tiếp: ${after.emoji} ${after.title}` } : { href: "/learn", label: "Về lộ trình học" }}
         onRetry={() => setStage({ kind: "quiz", round: Date.now() })}
+        review={<Review answers={stage.answers} takeaways={lesson.cards.flatMap((c) => (c.kind === "tip" ? [c.body] : []))} />}
       />
     </main>
   );
@@ -157,6 +160,14 @@ function CardView({ card }: { card: Card }) {
       );
     case "tip":
       return <Mascot size="lg">{<RichText text={card.body} />}</Mascot>;
+    case "repeated":
+      return (
+        <div className="space-y-3">
+          {card.title && <h2 className="text-lg font-bold">{card.title}</h2>}
+          {card.caption && <p className="text-sm text-muted">{card.caption}</p>}
+          <RepeatedGame opponentId={card.opponent} rounds={card.rounds} hidden={card.hidden} />
+        </div>
+      );
     case "tree":
       return (
         <div className="space-y-3">

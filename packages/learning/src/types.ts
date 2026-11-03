@@ -23,7 +23,9 @@ export type Card =
   | { kind: "tip"; body: string }
   | { kind: "matrix"; title?: string; game: MiniGame; highlight?: [number, number][]; caption?: string }
   /** solve = tô đường đi khi mọi người chơi tốt nhất */
-  | { kind: "tree"; title?: string; tree: MiniTree; solve?: boolean; caption?: string };
+  | { kind: "tree"; title?: string; tree: MiniTree; solve?: boolean; caption?: string }
+  /** Chơi thử Chia kẹo nhiều vòng với máy (opponent = mã chiến lược trong gt-core) */
+  | { kind: "repeated"; title?: string; opponent: string; rounds?: number; hidden?: boolean; caption?: string };
 
 type ExerciseBase = {
   /** Mã duy nhất, dùng để theo dõi ôn tập */

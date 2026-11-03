@@ -9,6 +9,7 @@ export function ResultScreen({
   failText,
   primary,
   onRetry,
+  review,
 }: {
   score: number;
   total: number;
@@ -16,6 +17,8 @@ export function ResultScreen({
   failText: string;
   primary: { href: string; label: string };
   onRetry: () => void;
+  /** Phần Giải đáp, hiện sau khi làm xong */
+  review?: React.ReactNode;
 }) {
   const passed = isPass(score, total);
   const need = Math.ceil(PASS_RATIO * total);
@@ -30,7 +33,11 @@ export function ResultScreen({
         </p>
         <p className="mt-1 text-muted">câu đúng</p>
       </div>
-      <Mascot>{passed ? passText : `${failText} Cần đúng ${need}/${total} câu để qua.`}</Mascot>
+      <Mascot>
+        {passed ? passText : `${failText} Cần đúng ${need}/${total} câu để qua.`}
+        {review ? " Xem Giải đáp bên dưới nhé 👇" : ""}
+      </Mascot>
+      {review}
       <div className="space-y-3">
         {passed ? (
           <Link href={primary.href} className="flex h-14 items-center justify-center rounded-2xl bg-accent text-lg font-bold text-accent-ink">

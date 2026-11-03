@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { LEVELS, findLevel, isLevelUnlocked, isPass, nextLesson, pickLevelTest, recordLevelSkip, type Exercise } from "@gai/learning";
 import { useProfiles } from "@/lib/profiles";
-import { QuizRunner } from "@/components/learn/QuizRunner";
+import { QuizRunner, type AnswerRecord } from "@/components/learn/QuizRunner";
+import { Review } from "@/components/learn/Review";
 import { ResultScreen } from "@/components/learn/ResultScreen";
 import { Mascot } from "@/components/Mascot";
 
@@ -12,7 +13,7 @@ export function LevelTest({ levelId }: { levelId: string }) {
   const level = findLevel(levelId)!;
   const { progress, updateProgress, ready } = useProfiles();
   const [questions, setQuestions] = useState<Exercise[] | null>(null);
-  const [done, setDone] = useState<{ score: number; total: number } | null>(null);
+  const [done, setDone] = useState<{ score: number; total: number; answers: AnswerRecord[] } | null>(null);
   const unlocked = !ready || isLevelUnlocked(LEVELS, level.id, progress);
 
   const start = () => {
@@ -52,9 +53,9 @@ export function LevelTest({ levelId }: { levelId: string }) {
         <QuizRunner
           key={questions.map((q) => q.id).join()}
           questions={questions}
-          onFinish={(score, total) => {
+          onFinish={(score, total, answers) => {
             if (isPass(score, total)) updateProgress((p) => recordLevelSkip(p, level.id));
-            setDone({ score, total });
+            setDone({ score, total, answers });
           }}
         />
       )}
@@ -70,6 +71,7 @@ export function LevelTest({ levelId }: { levelId: string }) {
             return n ? { href: `/learn/${n.id}`, label: `Học tiếp: ${n.emoji} ${n.title}` } : { href: "/learn", label: "Về lộ trình học" };
           })()}
           onRetry={start}
+          review={<Review answers={done.answers} />}
         />
       )}
     </main>

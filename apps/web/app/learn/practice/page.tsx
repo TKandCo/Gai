@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { LEVELS, markPracticed, pickPractice, recordAnswer, type Exercise } from "@gai/learning";
 import { useProfiles } from "@/lib/profiles";
-import { QuizRunner } from "@/components/learn/QuizRunner";
+import { QuizRunner, type AnswerRecord } from "@/components/learn/QuizRunner";
+import { Review } from "@/components/learn/Review";
 import { Mascot } from "@/components/Mascot";
 
 export default function PracticePage() {
   const { progress, updateProgress, ready } = useProfiles();
   const [questions, setQuestions] = useState<Exercise[] | null>(null);
-  const [done, setDone] = useState<{ score: number; total: number } | null>(null);
+  const [done, setDone] = useState<{ score: number; total: number; answers: AnswerRecord[] } | null>(null);
 
   // Chọn câu một lần khi vào trang, không đổi giữa chừng
   useEffect(() => {
@@ -39,9 +40,9 @@ export default function PracticePage() {
         <QuizRunner
           questions={questions}
           onAnswer={(q, ok) => updateProgress((p) => recordAnswer(p, q.id, ok))}
-          onFinish={(score, total) => {
+          onFinish={(score, total, answers) => {
             updateProgress((p) => markPracticed(p));
-            setDone({ score, total });
+            setDone({ score, total, answers });
           }}
         />
       )}
@@ -58,6 +59,7 @@ export default function PracticePage() {
               : "Hoàn thành luyện tập hôm nay! Ngày mai quay lại để giữ chuỗi nhé."}{" "}
             Câu làm sai sẽ được ôn lại sớm hơn.
           </Mascot>
+          <Review answers={done.answers} />
           <Link href="/learn" className="flex h-14 items-center justify-center rounded-2xl bg-accent text-lg font-bold text-accent-ink">
             Về lộ trình học
           </Link>
