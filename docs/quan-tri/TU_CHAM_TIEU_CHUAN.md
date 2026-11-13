@@ -1,6 +1,6 @@
 # Tự chấm theo Tiêu chuẩn code chung v1.0 — GAI (hạng B)
 
-> Người chấm: Tổng quản (phiên chính, **cũng là bên viết mã** → đây là tự chấm, cần CP/Trạm kiểm lại).
+> Người chấm: Tổng quản (phiên chính, **cũng là bên viết mã**). **CP đã kiểm lại 2026-11-13: chấp nhận, điều chỉnh KT-04** (biên bản: `D:CLAUDE PROJECTSuditgai-tu-cham-2026-11-13.md`, ngoài repo).
 > Ngày: 2026-11-13. Chủ dự án duyệt áp dụng tiêu chuẩn: 2026-11-13, trong phiên GAI.
 > Bản tiêu chuẩn: `docs/quan-tri/TIEU_CHUAN_CODE.md` (chép nguyên bản, SHA-256 `c1291757…2511f2`).
 > Trạng thái mã lúc chấm: commit `8ddce79`, trang thật https://gai.thuankhoi.com (GitHub Pages, website tĩnh).
@@ -11,8 +11,8 @@
 
 | Kết quả | Số quy tắc |
 |---|---|
-| Đạt | 13 |
-| Chưa / Một phần | 24 (11 Chưa + 13 Một phần) |
+| Đạt | 12 |
+| Chưa / Một phần | 25 (11 Chưa + 14 Một phần) |
 | Không áp dụng | 10 |
 | Chưa kiểm | 1 |
 | **Tổng** | **48** |
@@ -93,7 +93,7 @@ Tình trạng chung: **chưa đạt** tiêu chuẩn hạng B. Phần lớn đi�
 | Mã | Kết quả | Bằng chứng / ghi chú |
 |---|---|---|
 | KT-01 | **Chưa** | Có test chống tái phát cho một số lỗi (ví dụ câu trả lời dài có chữ "đáp án": `coach/src/selftest.ts`; chuỗi ngày học), nhưng **không đủ**: ví dụ lỗi tải file JS cũ (`55574ab`), lỗi cuộn trang Coach, lời báo "Gần đúng rồi" chưa có test. |
-| KT-04 | **Đạt** (tự kiểm) | Có 1 lần sửa kỳ vọng test (`gt-core/src/sensitivity.test.ts`) vì kỳ vọng ban đầu sai, mã đúng; lý do đã giải thích trong phiên làm việc, nhưng chưa qua PR. Cần bên kiểm xác nhận. |
+| KT-04 | **Một phần** | Có 1 lần sửa kỳ vọng test (`gt-core/src/sensitivity.test.ts`) vì kỳ vọng ban đầu sai, mã đúng. Lý do chỉ được giải thích trong phiên làm việc, **không có PR** nên không truy lại được (CP điều chỉnh từ Đạt, 2026-11-13). Tự đạt khi làm qua PR (QT-02). |
 
 ### CS — Cơ sở dữ liệu
 

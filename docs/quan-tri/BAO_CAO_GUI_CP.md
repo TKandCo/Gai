@@ -7,7 +7,7 @@
 ## Tiêu chuẩn đang theo
 
 - Tiêu chuẩn code chung **v1.0, hạng B**, chủ dự án duyệt áp dụng 2026-11-13 trong phiên GAI.
-- Tự chấm 48 quy tắc bắt buộc: **13 Đạt · 24 Chưa/Một phần · 10 Không áp dụng · 1 chưa kiểm** → chưa đạt. Chi tiết: `docs/quan-tri/TU_CHAM_TIEU_CHUAN.md` (tự chấm, cần CP/Trạm kiểm lại).
+- Tự chấm 48 quy tắc bắt buộc: **12 Đạt · 25 Chưa/Một phần · 10 Không áp dụng · 1 chưa kiểm** → chưa đạt (sau khi CP kiểm lại và hạ KT-04, 2026-11-13). Chi tiết: `docs/quan-tri/TU_CHAM_TIEU_CHUAN.md`.
 - Ngoại lệ: PT-02 (tạm giữ 3 lỗ hổng npm cho Trạm quét thử, xem lại muộn nhất 2026-11-20), QT-01 (kho công khai). Xem `docs/quan-tri/NGOAI_LE.md`.
 
 ## Đính chính so với thông tin CP nhận được
