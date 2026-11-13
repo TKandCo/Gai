@@ -1,6 +1,6 @@
 # Tự chấm theo Tiêu chuẩn code chung v1.0 — GAI (hạng B)
 
-> Người chấm: Tổng quản (phiên chính, **cũng là bên viết mã**). **CP đã kiểm lại 2026-11-13: chấp nhận, điều chỉnh KT-04** (biên bản: `D:CLAUDE PROJECTSuditgai-tu-cham-2026-11-13.md`, ngoài repo).
+> Người chấm: Tổng quản (phiên chính, **cũng là bên viết mã**). **CP đã kiểm lại 2026-11-13: chấp nhận, điều chỉnh KT-04** (biên bản: `D:/CLAUDE PROJECTS/audit/gai-tu-cham-2026-11-13.md`, ngoài repo).
 > Ngày: 2026-11-13. Chủ dự án duyệt áp dụng tiêu chuẩn: 2026-11-13, trong phiên GAI.
 > Bản tiêu chuẩn: `docs/quan-tri/TIEU_CHUAN_CODE.md` (chép nguyên bản, SHA-256 `c1291757…2511f2`).
 > Trạng thái mã lúc chấm: commit `8ddce79`, trang thật https://gai.thuankhoi.com (GitHub Pages, website tĩnh).
