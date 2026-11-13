@@ -10,6 +10,7 @@
 - ✅ Danh sách việc trong `docs/BACKLOG.md`
 - ✅ Lập cơ cấu tổ chức, checklist, báo cáo gửi CP (chủ dự án duyệt 2026-11-13)
 - ✅ Tạo `CLAUDE.md` có mục "Tổ chức dự án" (2026-11-13)
+- ✅ Áp dụng Tiêu chuẩn code chung v1.0 hạng B, tự chấm 48 quy tắc bắt buộc (`TU_CHAM_TIEU_CHUAN.md`), sổ ngoại lệ (`NGOAI_LE.md`) — 2026-11-13
 - ⏳ Đặt hạn cho các việc trong BACKLOG (hiện chưa việc nào có hạn)
 
 ## Phòng Kỹ thuật

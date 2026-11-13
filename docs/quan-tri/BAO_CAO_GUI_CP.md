@@ -4,6 +4,12 @@
 > Trạng thái: **chủ dự án đã duyệt 2026-11-13**.
 > Nguyên tắc: chỉ ghi điều có nguồn trong repo hoặc đã kiểm trực tiếp ngày 2026-11-13; điều chưa kiểm ghi "chưa kiểm". Không chép bí mật, chỉ ghi có/không và nơi lưu.
 
+## Tiêu chuẩn đang theo
+
+- Tiêu chuẩn code chung **v1.0, hạng B**, chủ dự án duyệt áp dụng 2026-11-13 trong phiên GAI.
+- Tự chấm 48 quy tắc bắt buộc: **13 Đạt · 24 Chưa/Một phần · 10 Không áp dụng · 1 chưa kiểm** → chưa đạt. Chi tiết: `docs/quan-tri/TU_CHAM_TIEU_CHUAN.md` (tự chấm, cần CP/Trạm kiểm lại).
+- Ngoại lệ: PT-02 (tạm giữ 3 lỗ hổng npm cho Trạm quét thử, xem lại muộn nhất 2026-11-20), QT-01 (kho công khai). Xem `docs/quan-tri/NGOAI_LE.md`.
+
 ## Đính chính so với thông tin CP nhận được
 
 - **App hiện KHÔNG dùng Supabase.** Repo có mã đăng nhập Supabase (`apps/web/lib/supabase.ts`, `app/login`, `app/auth/callback`) và một file cấu trúc bảng (`supabase/migrations/0001_profiles.sql`, có bật RLS), nhưng **chưa có project Supabase nào được nối**: không có biến môi trường Supabase trong repo, trên máy dự án hay trong workflow triển khai. Trang thật là website tĩnh trên GitHub Pages, phần đăng nhập tự tắt.
@@ -17,9 +23,12 @@
 | 1 | ~~Duyệt bộ tài liệu quản trị và mục "Tổ chức dự án" trong `CLAUDE.md`~~ | 2026-11-13 | **Đã duyệt 2026-11-13** |
 | 2 | Chọn nơi chạy Gai AI: **Google Cloud Run** (đề xuất) hay **chung máy chủ jenny** | 2026-11-03 | Chưa trả lời |
 | 3 | Cấp Claude API key và đồng ý chi phí theo lượt dùng để bật Gai AI | 2026-11-03 | Không có key thì app vẫn chạy chế độ cơ bản |
-| 4 | Cho phép vá 3 lỗ hổng npm (cần sửa `package.json`/lockfile, có thể phải nâng Next.js 15 → 16) | 2026-11-13 | Xem mục (7) |
+| 4 | ~~Vá 3 lỗ hổng npm~~ | 2026-11-13 | **Đã quyết 2026-11-13: tạm giữ cho Trạm quét GĐ0, vá sau; hạn 2026-11-20** (NGOAI_LE #1) |
 | 5 | Danh sách nguồn tin cho Radar sự kiện | 2026-11-03 (BACKLOG) | Chưa có |
 | 6 | Có cần đồng bộ nhiều thiết bị qua Supabase không (nếu có: phụ huynh phải đồng ý cho dữ liệu trẻ em) | 2026-11-03 (BACKLOG) | Hiện chỉ có sao lưu bằng file |
+| 7 | Bật bảo vệ nhánh `main` + làm việc qua PR (QT-02) — chủ dự án bật trong GitHub | 2026-11-13 | Đổi cách làm việc hằng ngày |
+| 8 | Xác nhận 2FA cho GitHub TKandCo, Squarespace, Google, Anthropic (BM-06) | 2026-11-13 | Chủ dự án tự làm |
+| 9 | Duyệt danh sách việc để đạt tiêu chuẩn (cuối `TU_CHAM_TIEU_CHUAN.md`), gồm cài gitleaks (AI-06) | 2026-11-13 | Sửa mã ở lượt sau |
 
 ## (2) Việc quá hạn
 
@@ -84,7 +93,7 @@ Chi tiết: `docs/quan-tri/CHECKLIST.md`. Tóm tắt:
 
 | Phòng | Đã làm | Đang làm | Sẽ làm | Chờ chủ dự án | Chưa kiểm |
 |---|---|---|---|---|---|
-| Tổng quản | 4 | 0 | 1 | 0 | 0 |
+| Tổng quản | 5 | 0 | 1 | 0 | 0 |
 | Kỹ thuật | 7 | 0 | 3 | 2 | 0 |
 | Nội dung & Sư phạm | 4 | 0 | 1 | 0 | 1 |
 | Kiểm định & An toàn | 2 | 0 | 1 | 0 | 3 |

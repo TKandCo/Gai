@@ -9,6 +9,12 @@ Chạy tại https://gai.thuankhoi.com (GitHub Pages, website tĩnh). Kiến tr�
 - `npm run dev` — chạy trên máy. `npm run build:static` — build bản cho GitHub Pages.
 - Đẩy lên `main` = tự triển khai lên gai.thuankhoi.com (`.github/workflows/pages.yml`).
 
+## Tiêu chuẩn
+
+- Theo **Tiêu chuẩn code chung v1.0**, **hạng B** (chủ dự án duyệt áp dụng 2026-11-13): `docs/quan-tri/TIEU_CHUAN_CODE.md`.
+- Bản tự chấm: `docs/quan-tri/TU_CHAM_TIEU_CHUAN.md`. Ngoại lệ: `docs/quan-tri/NGOAI_LE.md`.
+- Báo lỗi phải ghi mã quy tắc (ví dụ `FE-01`). Không cài công cụ hay gói mới khi chưa được chủ dự án duyệt (AI-06).
+
 ## Tổ chức dự án
 
 Chi tiết: `docs/quan-tri/TO_CHUC_DU_AN.md` (duyệt 2026-11-13).
